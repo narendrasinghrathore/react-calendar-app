@@ -9,4 +9,4 @@ install:
   - npm install -g firebase-tools
 
 after_success:
-  - firebase deploy --project rcapp --token $FIREBASE_TOKEN
+  - firebase deploy --project calendar-application-react --token $FIREBASE_TOKEN
