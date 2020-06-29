@@ -1,6 +1,8 @@
 const ACTION = "[CALENDAR]: ";
-const GET_MONTH = `${ACTION} Get Months`;
-const getMonth = (month) => ({ type: GET_MONTH, payload: { month } });
+const GET_MONTH = `${ACTION} Get Total Days of Months`;
+const getMonthDays = (month: number, year: number) => ({
+  type: GET_MONTH,
+  payload: { month, year },
+});
 
-export default getMonth;
-export { GET_MONTH };
+export { getMonthDays, GET_MONTH };

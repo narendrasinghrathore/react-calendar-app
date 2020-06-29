@@ -1,4 +1,5 @@
 import React from 'react';
+import Month from '../Month/Month';
 export default function Calendar() {
     return <>
         <h3>
@@ -6,8 +7,8 @@ export default function Calendar() {
         <section>
             <nav>
                 <div>
-                    Month
-                    </div>
+                    <Month />
+                </div>
                 <div>
                     Week
                     </div>

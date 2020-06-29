@@ -1,17 +1,22 @@
 import thunkMiddleware from "redux-thunk";
-import rootReducer from "./reducers";
 import loggerMiddleware from "./middleware/logger";
 import { applyMiddleware, compose, createStore } from "redux";
 import monitorReducerEnhancer from "./enhancers/monitorReducer";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
+import { combineReducers } from "redux";
+import { month } from "./reducers";
 
-export default function configureStore(preloadedState) {
-  const middlewares = [loggerMiddleware, thunkMiddleware];
+const rootReducer = combineReducers({
+  month,
+});
+
+export default function configureStore(preloadedState: any) {
+  const middlewares: any = [loggerMiddleware, thunkMiddleware];
   const middlewareEnhancer = applyMiddleware(...middlewares);
 
-  const enhancers = [middlewareEnhancer, monitorReducerEnhancer];
-  const composedEnhancers =
+  const enhancers: any = [middlewareEnhancer, monitorReducerEnhancer];
+  const composedEnhancers: any =
     process.env.NODE_ENV !== "production"
       ? composeWithDevTools(...enhancers)
       : compose(...enhancers);
@@ -31,9 +36,13 @@ export default function configureStore(preloadedState) {
    * This makes for a much faster development process.
    * We'll add hot reloading both to our Redux reducers and to our React components.
    */
-  if (process.env.NODE_ENV !== "production" && module.hot) {
-    module.hot.accept("./reducers", () => store.replaceReducer(rootReducer));
-  }
+  // if (process.env.NODE_ENV !== "production" && module?.hot) {
+  // module.hot.accept("./reducers", () => store.replaceReducer(rootReducer));
+  // }
 
   return store;
 }
+
+export * from "./actions";
+export * from "./reducers";
+export * from "./selectors";
