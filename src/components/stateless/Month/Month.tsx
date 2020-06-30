@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
+import './Month.scss';
 import { useSelector, useDispatch } from "react-redux";
 import { getTotalNumberOfDays, getMonthDays } from "../../../store";
+import { cardsContainer } from "../../../styles/month";
 
 export default function Month() {
   const [month, year] = [new Date().getMonth(), new Date().getFullYear()];
@@ -13,10 +15,10 @@ export default function Month() {
   }, [dispatch, month, year]);
 
 
-  return <>
+  return <div style={cardsContainer}>
     {Array.from(Array(totalDays), (_, i) => {
-      return <div key={i}>
+      return <div className="cards" key={i}>
         {i + 1}
       </div>
-    })}</>;
+    })}</div>;
 }
