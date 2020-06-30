@@ -5,20 +5,9 @@ export default function Calendar() {
         <h3>
             Calendar</h3>
         <section>
-            <nav>
-                <div>
-                    <Month />
-                </div>
-                <div>
-                    Week
-                    </div>
-                <div>
-                    Day
-                    </div>
-            </nav>
-            <article>
-
-            </article>
+            <div>
+                <Month />
+            </div>
         </section>
     </>;
 }

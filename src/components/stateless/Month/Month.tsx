@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getTotalNumberOfDays, getMonthDays } from "../../../store";
 
 export default function Month() {
+  const [month, year] = [new Date().getMonth(), new Date().getFullYear()];
   const dispatch = useDispatch();
   const totalDays = useSelector((state: any) => getTotalNumberOfDays(state));
-  const [month, year] = [new Date().getMonth(), new Date().getFullYear()];
+
 
   useEffect(() => {
     dispatch(getMonthDays(month + 1, year));
@@ -13,5 +14,9 @@ export default function Month() {
 
 
   return <>
-    <div>Month:{totalDays}</div></>;
+    {Array.from(Array(totalDays), (_, i) => {
+      return <div key={i}>
+        {i + 1}
+      </div>
+    })}</>;
 }
