@@ -7,6 +7,11 @@ import { CSSProperties } from "react";
  */
 type MyStyles = Partial<CSSProperties>;
 
+const cardsContainerLayout: CSSProperties = {
+  display: "flex",
+  justifyContent: "center",
+};
+
 const cards: CSSProperties = {
   boxShadow: "2px 2px 1px 0px #999",
   margin: 3,
@@ -19,7 +24,6 @@ const cards: CSSProperties = {
 const cardsContainer: CSSProperties = {
   display: "flex",
   flexWrap: "wrap",
-  margin: "10 auto",
 };
 
-export { cards, cardsContainer };
+export { cards, cardsContainer, cardsContainerLayout };
