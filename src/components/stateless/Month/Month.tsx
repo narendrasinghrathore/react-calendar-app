@@ -15,7 +15,7 @@ export default function Month() {
   }, [dispatch, month, year]);
 
 
-  return <div style={cardsContainerLayout}><div style={cardsContainer}>
+  return <div><div className="cardContainer">
     {Array.from(Array(totalDays), (_, i) => {
       return <div className="cards" key={i}>
         {i + 1}

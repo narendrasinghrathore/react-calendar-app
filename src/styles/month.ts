@@ -8,8 +8,8 @@ import { CSSProperties } from "react";
 type MyStyles = Partial<CSSProperties>;
 
 const cardsContainerLayout: CSSProperties = {
-  display: "flex",
-  justifyContent: "center",
+  display: "grid-inline",
+  gridTemplateAreas: "auto auto auto auto",
 };
 
 const cards: CSSProperties = {
@@ -17,13 +17,14 @@ const cards: CSSProperties = {
   margin: 3,
   padding: 10,
   borderRadius: 3,
-  width: 50,
-  height: 50,
+  width: "200px",
+  height: "200px",
 };
 
 const cardsContainer: CSSProperties = {
-  display: "flex",
-  flexWrap: "wrap",
+  display: "grid",
+  gridTemplateAreas: "auto auto auto auto auto",
+  gridGap: "10px",
 };
 
 export { cards, cardsContainer, cardsContainerLayout };

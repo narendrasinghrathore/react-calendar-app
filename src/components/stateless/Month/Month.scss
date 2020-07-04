@@ -1,10 +1,17 @@
+.cardContainer{
+  display: grid;
+  grid-template-columns:auto auto auto auto auto auto auto;
+  grid-gap: 1px;
+  padding: 5px;
+  box-sizing: border-box;
+}
 .cards {
   box-shadow: 2px 2px 1px 0px #999;
-  margin: 3px;
+  // margin: 3px;
   padding: 10px;
   border-radius: 3px;
-  width: 50px;
-  height: 50px;
+  // width: 100px;
+  height: 10vw;
   transition: transform 0.2s ease-in-out;
 
   &:hover {
