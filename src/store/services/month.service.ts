@@ -1,3 +1,5 @@
+import { WeekName } from "../../models";
+
 const incorrectDateForamtLabel = "Incorrect date format.";
 const MonthService = {
   /**
@@ -17,6 +19,17 @@ const MonthService = {
       console.warn(incorrectDateForamtLabel);
       return 0;
     }
+  },
+  getWeekNames: (): WeekName[] => {
+    return [
+      { alias: "Sun", name: "Sunday" },
+      { alias: "Mon", name: "Monday" },
+      { alias: "Tue", name: "Tuesday" },
+      { alias: "Wed", name: "Wednesday" },
+      { alias: "Thu", name: "Thursday" },
+      { alias: "Fri", name: "Friday" },
+      { alias: "Sat", name: "Saturday" },
+    ];
   },
 };
 export default MonthService;

@@ -15,3 +15,6 @@ export const getModuleState = (state: IAppState) => getAppState(state).month;
  */
 export const getTotalNumberOfDays = (state: IAppState) =>
   getModuleState(state).totalNumberOfDays;
+
+export const getWeekNames = (state: IAppState) =>
+  getModuleState(state).weekNames;

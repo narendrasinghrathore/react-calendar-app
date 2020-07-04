@@ -1,6 +1,12 @@
-.cardContainer{
+.weekName {
+  padding: 5px;
+  border-bottom: 1px solid #eeeeee;
+  color: #a09f9f;
+}
+
+.cardContainer {
   display: grid;
-  grid-template-columns:auto auto auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto;
   grid-gap: 1px;
   padding: 5px;
   box-sizing: border-box;
