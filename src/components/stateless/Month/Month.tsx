@@ -20,6 +20,14 @@ export default function Month() {
 
   const dateRef = useRef<HTMLInputElement>(null);
 
+  /**
+   * As getDay() return value between 0-6 i.e 0 is Sunday and 6 is Saturday.
+   * So we need to add 1 to get exact index to update our property which is
+   * used to start the column grid position. As we position first day of month
+   * based on grid-column-start rest fall accordingly in order.
+   */
+  const gridColumnStartFrom = new Date(`${year}-${month}-01`).getDay() + 1;
+
   useEffect(() => {
     //Call action get week names(s)
     dispatch(actionGetWeekNames());
@@ -55,6 +63,17 @@ export default function Month() {
     dispatch(actionSetSelectedDate(value));
   }
 
+  const selectedDate = (dd: number) => {
+    dd = dd + 1;
+    let classes = "cards";
+    const selectedDate = parseInt(todayDate.split("-")[2]);
+
+    if (dd === selectedDate) {
+      classes = classes.concat(' selected-date');
+    }
+    return classes;
+  }
+
 
   return <div>
     <div className="date-picker">
@@ -63,7 +82,10 @@ export default function Month() {
     <div className="cardContainer">
       {weekNames.map((_) => (<div key={_.alias} className="weekName">{_.alias}</div>))}
       {Array.from(Array(totalDays), (_, i) => {
-        return <div data-date={i + 1} onClick={(e) => openModal(e)} className="cards" key={i}>
+        const style = i === 0 ? { gridColumnStart: gridColumnStartFrom } : {};
+        return <div
+          data-date={i + 1} style={style}
+          onClick={(e) => openModal(e)} className={selectedDate(i)} key={i}>
           {i + 1}
         </div>
       })}</div></div>;
