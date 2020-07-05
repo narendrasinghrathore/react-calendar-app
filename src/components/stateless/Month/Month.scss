@@ -25,13 +25,14 @@
     background-color: #dedede;
   }
   &:hover {
-    color:black;
+    color: black;
   }
 }
 
 .date-picker {
   border-bottom: 1px solid #dedede;
   height: 30px;
+  padding: 5px;
 }
 
 .selected-date {
