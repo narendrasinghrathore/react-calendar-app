@@ -21,8 +21,11 @@
   height: 10vw;
   transition: all 0.2s ease-in-out;
 
-  &:hover {
+  &:not(.selected-date):hover {
     background-color: #dedede;
+  }
+  &:hover {
+    color:black;
   }
 }
 
