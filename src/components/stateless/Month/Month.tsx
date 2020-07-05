@@ -1,44 +1,66 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import './Month.scss';
 import { useSelector, useDispatch } from "react-redux";
 import { getTotalNumberOfDays, actionGetMonthDays, actionGetWeekNames, getWeekNames, actionSetSelectedDate, getSelectedDate } from "../../../store";
 import { IAppState, WeekName } from "../../../models";
 
 export default function Month() {
+  /**
+   * Month i.e. number, default would be current day/ today.
+   * Changes as per user selection from input type date.
+   */
   const [month, setMonth] = useState(new Date().getMonth() + 1);
+  /**
+   * Year i.e. number, default would be current day/ today.
+   * Changes as per user selection from input type date.
+   */
   const [year, setYear] = useState(new Date().getFullYear());
   /**
    * Using state management
    */
   const dispatch = useDispatch();
+  /**
+   * Totol days of given month.
+   */
   const totalDays = useSelector((state: any) => getTotalNumberOfDays(state));
+  /**
+   * Return week name, starts with Sunday, Monday .. , Saturday
+   */
   const weekNames: WeekName[] = useSelector((state: IAppState) => getWeekNames(state));
   /**
-   * Set today date
+   * Set today date, used in our input type date.
    */
   const [todayDate, setTodayDate] = useState(useSelector((state: IAppState) => getSelectedDate(state)));
-
-  const dateRef = useRef<HTMLInputElement>(null);
 
   /**
    * As getDay() return value between 0-6 i.e 0 is Sunday and 6 is Saturday.
    * So we need to add 1 to get exact index to update our property which is
-   * used to start the column grid position. As we position first day of month
+   * used to set start column position in grid. As we position first day of month
    * based on grid-column-start rest fall accordingly in order.
    */
   const gridColumnStartFrom = new Date(`${year}-${month}-01`).getDay() + 1;
 
+  /**
+   * Get week name(s)
+   */
   useEffect(() => {
     //Call action get week names(s)
     dispatch(actionGetWeekNames());
   }, [dispatch]);
 
+  /**
+   * Get total number of days in given month, based on month and year as input.
+   */
   useEffect(() => {
     // Call action get given month total days
     dispatch(actionGetMonthDays(month, year));
   }, [dispatch, month, year]);
 
-  const openModal = (e: any) => {
+  /**
+   * Update the todayDate and get total number of days for given month and year.
+   * @param e Event
+   */
+  const updateSelectedDate = (e: any) => {
     e.stopPropagation();
     const { date } = e.target.dataset;
     const month_ = month;
@@ -53,6 +75,10 @@ export default function Month() {
     updateDate(result);
   }
 
+  /**
+   * Update the selectedDate
+   * @param e Event
+   */
   const updateDate = (e: any) => {
     e.stopPropagation();
     const { value } = e.target;
@@ -63,6 +89,11 @@ export default function Month() {
     dispatch(actionSetSelectedDate(value));
   }
 
+  /**
+   * Will set classes based on user selection in calendar
+   * or default that is today
+   * @param dd number i.e. 0 - 29/30/31
+   */
   const selectedDate = (dd: number) => {
     dd = dd + 1;
     let classes = "cards";
@@ -77,7 +108,7 @@ export default function Month() {
 
   return <div>
     <div className="date-picker">
-      <input ref={dateRef} type="date" onChange={(e) => updateDate(e)} value={todayDate} />
+      <input type="date" onChange={(e) => updateDate(e)} value={todayDate} />
     </div>
     <div className="cardContainer">
       {weekNames.map((_) => (<div key={_.alias} className="weekName">{_.alias}</div>))}
@@ -85,7 +116,7 @@ export default function Month() {
         const style = i === 0 ? { gridColumnStart: gridColumnStartFrom } : {};
         return <div
           data-date={i + 1} style={style}
-          onClick={(e) => openModal(e)} className={selectedDate(i)} key={i}>
+          onClick={(e) => updateSelectedDate(e)} className={selectedDate(i)} key={i}>
           {i + 1}
         </div>
       })}</div></div>;
