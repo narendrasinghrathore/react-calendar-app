@@ -15,6 +15,15 @@ export const getModuleState = (state: IAppState) => getAppState(state).month;
  */
 export const getTotalNumberOfDays = (state: IAppState) =>
   getModuleState(state).totalNumberOfDays;
-
+/**
+ * Return week names array of object i.e. [ { name: "Sunday" alias:"Sun"}, ...]
+ * @param state IAppState
+ */
 export const getWeekNames = (state: IAppState) =>
   getModuleState(state).weekNames;
+/**
+ * Return selected, initially that would be your current date in yyyy-MM-dd format
+ * @param state IAppState
+ */
+export const getSelectedDate = (state: IAppState) =>
+  getModuleState(state).selectedDate;

@@ -31,5 +31,9 @@ const MonthService = {
       { alias: "Sat", name: "Saturday" },
     ];
   },
+
+  getTodayDate: (): string => {
+    return new Date().toISOString().split("T")[0];
+  },
 };
 export default MonthService;

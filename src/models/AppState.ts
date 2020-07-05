@@ -10,4 +10,5 @@ export interface WeekName {
 export interface IMonthState {
   totalNumberOfDays: number;
   weekNames: WeekName[];
+  selectedDate: string;
 }
