@@ -11,4 +11,5 @@ export interface IMonthState {
   totalNumberOfDays: number;
   weekNames: WeekName[];
   selectedDate: string;
+  visible: boolean;
 }

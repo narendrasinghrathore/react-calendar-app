@@ -27,3 +27,9 @@ export const getWeekNames = (state: IAppState) =>
  */
 export const getSelectedDate = (state: IAppState) =>
   getModuleState(state).selectedDate;
+/**
+ * Is calendar visible
+ * @param state IAppState
+ */
+export const getCalendarVisible = (state: IAppState) =>
+  getModuleState(state).visible;

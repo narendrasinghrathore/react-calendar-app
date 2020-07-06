@@ -1,10 +1,17 @@
-import { GET_MONTH, GET_WEEKNAMES, SET_DATE } from "../actions/month.action";
+import {
+  GET_MONTH,
+  GET_WEEKNAMES,
+  SET_DATE,
+  SHOW_CALENDAR,
+  HIDE_CALENDAR,
+} from "../actions/month.action";
 import MonthService from "../services/month.service";
 import { IMonthState } from "../../models";
 const intialData: IMonthState = {
   totalNumberOfDays: 0,
   weekNames: [],
-  selectedDate: MonthService.getTodayDate()
+  selectedDate: MonthService.getTodayDate(),
+  visible: false,
 };
 
 const month = (state = intialData || undefined, action: any) => {
@@ -24,6 +31,13 @@ const month = (state = intialData || undefined, action: any) => {
     case SET_DATE:
       const date = action.payload;
       return { ...state, selectedDate: date };
+
+    case SHOW_CALENDAR:
+      const show = action.payload;
+      return { ...state, visible: show };
+    case HIDE_CALENDAR:
+      const hide = action.payload;
+      return { ...state, visible: hide };
 
     default:
       return { ...state };

@@ -1,0 +1,18 @@
+img.chevron {
+  height: 16px;
+  margin: 0px;
+  float: right;
+  clear: ri;
+  background-color: #609bc8;
+  border-radius: 3px;
+  padding: 5px;
+  cursor: pointer;
+  box-shadow: 2px 3px 5px 1px #adabab;
+  transition: transform 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+img.show {
+  transform: rotate(180deg);
+  background-color: #dedede;
+  box-shadow: none;
+}

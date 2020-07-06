@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import './Month.scss';
 import { useSelector, useDispatch } from "react-redux";
-import { getTotalNumberOfDays, actionGetMonthDays, actionGetWeekNames, getWeekNames, actionSetSelectedDate, getSelectedDate } from "../../../store";
+import { getTotalNumberOfDays, actionGetMonthDays, actionGetWeekNames, getWeekNames, actionSetSelectedDate, getSelectedDate, getCalendarVisible } from "../../../store";
 import { IAppState, WeekName } from "../../../models";
+import Chevron from "../Chevron/Chevron";
 
 export default function Month() {
+
+  /**
+   * Hide or show the calendar
+   */
+  const isCalendarVisible = useSelector((state: IAppState) => getCalendarVisible(state));
+
+
   /**
    * Month i.e. number, default would be current day/ today.
    * Changes as per user selection from input type date.
@@ -106,11 +114,21 @@ export default function Month() {
   }
 
 
+  const calendarContainerClasses = () => {
+    let baseClass = 'cardContainer';
+    if (!isCalendarVisible) {
+      baseClass = baseClass.concat(" hideCalendar");
+    }
+    return baseClass;
+  }
+
+
   return <div>
     <div className="date-picker">
       <input type="date" onChange={(e) => updateDate(e)} value={todayDate} />
+      <Chevron />
     </div>
-    <div className="cardContainer">
+    <div className={calendarContainerClasses()}>
       {weekNames.map((_) => (<div key={_.alias} className="weekName">{_.alias}</div>))}
       {Array.from(Array(totalDays), (_, i) => {
         const style = i === 0 ? { gridColumnStart: gridColumnStartFrom } : {};
@@ -119,5 +137,7 @@ export default function Month() {
           onClick={(e) => updateSelectedDate(e)} className={selectedDate(i)} key={i}>
           {i + 1}
         </div>
-      })}</div></div>;
+      })}
+    </div>
+  </div>;
 }
