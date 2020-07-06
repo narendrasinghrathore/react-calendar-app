@@ -38,6 +38,11 @@
   padding: 5px;
 }
 
+.date-picker input[type="date"]{
+  border-radius: 2px;
+  border: 1px solid #b9b9b9;
+}
+
 .selected-date {
   background-color: #4083d8;
   color: white;
