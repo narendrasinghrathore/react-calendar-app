@@ -1,34 +1,53 @@
-.weekName {
-  padding: 5px;
-  border-bottom: 1px solid #eeeeee;
-  color: #a09f9f;
+$max-width: 400px;
+
+.weekNames {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  .weekName {
+    padding: 5px;
+    border-bottom: 1px solid #eeeeee;
+    color: #a09f9f;
+  }
+
+  @media screen and (max-width: $max-width) {
+    display: none;
+  }
 }
 
 .cardContainer {
+  position: relative;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto;
   grid-gap: 1px;
   padding: 5px;
   box-sizing: border-box;
+
+  @media screen and (max-width: $max-width) {
+    display: flex;
+    flex-direction: column;
+
+    .cards {
+      height: 8vh;
+    }
+  }
 }
-.hideCalendar{
+.hideCalendar {
   display: none;
 }
 .cards {
+  position: relative;
   cursor: pointer;
   box-shadow: 2px 2px 1px 0px #999;
   // margin: 3px;
   padding: 10px;
   border-radius: 3px;
+  // border:1px solid ;
   // width: 100px;
   height: 10vw;
   transition: all 0.2s ease-in-out;
 
   &:not(.selected-date):hover {
     background-color: #dedede;
-  }
-  &:hover {
-    color: black;
   }
 }
 
@@ -38,15 +57,30 @@
   padding: 5px;
 }
 
-.date-picker input[type="date"]{
+.date-picker input[type="date"] {
   border-radius: 2px;
   border: 1px solid #b9b9b9;
 }
 
 .selected-date {
-  background-color: #4083d8;
   color: white;
   font-weight: 600;
   font-size: 1.2rem;
   transition: all 0.2s ease-in-out;
+}
+
+.selected-date span {
+  height: 30px;
+  width: 30px;
+  background-color: #3881a9;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+
+  &:hover {
+    background-color: #2a607e;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
 }

@@ -128,14 +128,17 @@ export default function Month() {
       <input type="date" onChange={(e) => updateDate(e)} value={todayDate} />
       <Chevron />
     </div>
+    <div className="weekNames">
+      {weekNames.map((_) => (<div key={_.alias} className="weekName">{_.alias.toLocaleUpperCase()}</div>))}
+    </div>
     <div className={calendarContainerClasses()}>
-      {weekNames.map((_) => (<div key={_.alias} className="weekName">{_.alias}</div>))}
+
       {Array.from(Array(totalDays), (_, i) => {
         const style = i === 0 ? { gridColumnStart: gridColumnStartFrom } : {};
         return <div
           data-date={i + 1} style={style}
           onClick={(e) => updateSelectedDate(e)} className={selectedDate(i)} key={i}>
-          {i + 1}
+          <span data-date={i + 1}>{i + 1} </span>
         </div>
       })}
     </div>
