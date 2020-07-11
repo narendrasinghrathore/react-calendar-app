@@ -44,8 +44,8 @@ export default function AddEvent() {
 
     const showHideDialog = useSelector((state: IAppState) => getDialogStatus(state));
 
-    const [fullWidth, setFullWidth] = React.useState(true);
-    const [maxWidth, setMaxWidth] = React.useState<DialogProps['maxWidth']>('lg');
+    const [fullWidth] = React.useState(true);
+    const [maxWidth] = React.useState<DialogProps['maxWidth']>('lg');
 
     const handleClose = () => {
         dispatch(actionHideDialog());
