@@ -12,4 +12,5 @@ export interface IMonthState {
   weekNames: WeekName[];
   selectedDate: string;
   visible: boolean;
+  showDialog: boolean;
 }

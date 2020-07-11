@@ -33,3 +33,9 @@ export const getSelectedDate = (state: IAppState) =>
  */
 export const getCalendarVisible = (state: IAppState) =>
   getModuleState(state).visible;
+/**
+ * Return flag to show or hide add event dialog
+ * @param state IAppState
+ */
+export const getDialogStatus = (state: IAppState) =>
+  getModuleState(state).showDialog;

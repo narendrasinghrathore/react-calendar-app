@@ -4,7 +4,8 @@ const GET_WEEKNAMES = `${ACTION} Get Week Names`;
 const SET_DATE = `${ACTION} Set Selected Date`;
 const SHOW_CALENDAR = `${ACTION} Show Calendar`;
 const HIDE_CALENDAR = `${ACTION} Hide Calendar`;
-
+const SHOW_DIALOG = `${ACTION} Show Dialog`;
+const HIDE_DIALOG = `${ACTION} Hide Dialog`;
 const actionShowCalendar = (flag: boolean) => ({
   type: SHOW_CALENDAR,
   payload: true,
@@ -29,15 +30,27 @@ const actionSetSelectedDate = (date: string) => ({
   payload: date,
 });
 
+const actionShowDialog = () => ({
+  type: SHOW_DIALOG,
+});
+
+const actionHideDialog = () => ({
+  type: HIDE_DIALOG,
+});
+
 export {
   actionGetMonthDays,
   actionGetWeekNames,
   actionSetSelectedDate,
   actionShowCalendar,
   actionHideCalendar,
+  actionShowDialog,
+  actionHideDialog,
   GET_MONTH,
   GET_WEEKNAMES,
   SET_DATE,
   SHOW_CALENDAR,
   HIDE_CALENDAR,
+  SHOW_DIALOG,
+  HIDE_DIALOG,
 };

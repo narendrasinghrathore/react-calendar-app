@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './Month.scss';
 import { useSelector, useDispatch } from "react-redux";
-import { getTotalNumberOfDays, actionGetMonthDays, actionGetWeekNames, getWeekNames, actionSetSelectedDate, getSelectedDate, getCalendarVisible } from "../../../store";
+import { getTotalNumberOfDays, actionGetMonthDays, actionGetWeekNames, getWeekNames, actionSetSelectedDate, getSelectedDate, getCalendarVisible, actionShowDialog } from "../../../store";
 import { IAppState, WeekName } from "../../../models";
 import Chevron from "../Chevron/Chevron";
 
@@ -81,6 +81,8 @@ export default function Month() {
       stopPropagation: () => { }
     }
     updateDate(result);
+
+    dispatch(actionShowDialog());
   }
 
   /**
