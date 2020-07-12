@@ -60,6 +60,10 @@ $max-width: 400px;
 .date-picker input[type="date"] {
   border-radius: 2px;
   border: 1px solid #b9b9b9;
+  padding: 2px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4d7bc1;
 }
 
 .selected-date {

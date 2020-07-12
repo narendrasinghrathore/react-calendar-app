@@ -126,8 +126,11 @@ export default function Month() {
 
 
   return <div>
+    {/* <DatePicker selectedDate={todayDate} onChange={(e) => updateDate(e)} /> */}
+
     <div className="date-picker">
       <input type="date" onChange={(e) => updateDate(e)} value={todayDate} />
+
       <Chevron />
     </div>
     <div className="weekNames">
