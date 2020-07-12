@@ -7,9 +7,20 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import { TransitionProps } from '@material-ui/core/transitions';
+
+
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../../models";
 import { getDialogStatus, actionHideDialog, getSelectedDate } from "../../../store";
+import { Slide } from "@material-ui/core";
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & { children?: React.ReactElement<any, any> },
+  ref: React.Ref<unknown>,
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function AddEvent() {
 
@@ -34,6 +45,7 @@ export default function AddEvent() {
             maxWidth={maxWidth}
             open={showHideDialog}
             onClose={handleClose}
+            TransitionComponent={Transition}
             aria-labelledby="max-width-dialog-title"
         >
             <DialogTitle id="max-width-dialog-title">{todayDate}</DialogTitle>
