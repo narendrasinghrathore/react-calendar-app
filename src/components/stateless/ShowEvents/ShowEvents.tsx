@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddEvent() {
+export default function ShowEvent() {
 
 
     const todayDate = useSelector((state: IAppState) => getSelectedDate(state));

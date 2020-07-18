@@ -54,11 +54,6 @@ export default function Month() {
   useEffect(() => {
     //Call action get week names(s)
     dispatch(actionGetWeekNames());
-    fetch('/__/firebase/init.json').then(async response => {
-      const res = await response.json();
-      console.log(res);
-      firebase.initializeApp(res);
-    });
   }, [dispatch]);
 
   /**
