@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getTotalNumberOfDays, actionGetMonthDays, actionGetWeekNames, getWeekNames, actionSetSelectedDate, getSelectedDate, getCalendarVisible, actionShowDialog } from "../../../store";
 import { IAppState, WeekName } from "../../../models";
 import Chevron from "../Chevron/Chevron";
-import * as firebase from 'firebase/app';
 export default function Month() {
 
   /**
