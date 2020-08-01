@@ -35,6 +35,7 @@ $max-width: 400px;
   display: none;
 }
 .cards {
+  z-index: 0;
   position: relative;
   cursor: pointer;
   box-shadow: 2px 2px 1px 0px #999;
@@ -55,6 +56,7 @@ $max-width: 400px;
   border-bottom: 1px solid #dedede;
   height: 30px;
   padding: 5px;
+  position: relative;
 }
 
 .date-picker input[type="date"] {

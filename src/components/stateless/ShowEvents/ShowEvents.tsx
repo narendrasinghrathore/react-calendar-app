@@ -21,7 +21,9 @@ const Transition = React.forwardRef(function Transition(
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
+/**
+ * Show event(s) of selected date
+ */
 export default function ShowEvent() {
 
 

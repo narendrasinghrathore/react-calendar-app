@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getTotalNumberOfDays, actionGetMonthDays, actionGetWeekNames, getWeekNames, actionSetSelectedDate, getSelectedDate, getCalendarVisible, actionShowDialog } from "../../../store";
 import { IAppState, WeekName } from "../../../models";
 import Chevron from "../Chevron/Chevron";
+import AddIcon from '@material-ui/icons/Add';
+import Fab from "@material-ui/core/Fab";
+import Box from "@material-ui/core/Box";
 export default function Month() {
 
   /**
@@ -127,7 +130,14 @@ export default function Month() {
   return <div>
     <div className="date-picker">
       <input type="date" onChange={(e) => updateDate(e)} value={todayDate} />
+      <Box component="div" style={{ position: 'absolute', right: 0 }}>
+        <Fab color="primary" aria-label="add" style={{ zIndex: 10, position: "fixed", bottom: '20px', right: '20px' }}>
+          <AddIcon />
+        </Fab>
+
+      </Box>
       <Chevron />
+
     </div>
     <div className="weekNames">
       {weekNames.map((_) => (<div key={_.alias} className="weekName">{_.alias.toLocaleUpperCase()}</div>))}

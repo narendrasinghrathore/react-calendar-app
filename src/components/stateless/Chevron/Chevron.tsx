@@ -4,6 +4,9 @@ import down from "../../../assets/icons/chevron-down-90.png";
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../../models";
 import { getCalendarVisible, actionShowCalendar, actionHideCalendar } from "../../../store";
+/**
+ * Chevron,show hide calendar
+ */
 export default function Chevron() {
 
   const disptach = useDispatch();
