@@ -1,3 +1,4 @@
+@import "../../../partial";
 $max-width: 400px;
 
 .weekNames {
@@ -65,7 +66,7 @@ $max-width: 400px;
   padding: 2px;
   font-size: 1.2rem;
   font-weight: 600;
-  color: #4d7bc1;
+  color: $background-color;
 }
 
 .selected-date {
@@ -78,7 +79,7 @@ $max-width: 400px;
 .selected-date span {
   height: 30px;
   width: 30px;
-  background-color: #3881a9;
+  background-color: $background-color;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -86,7 +87,7 @@ $max-width: 400px;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
   &:hover {
-    background-color: #2a607e;
+    background-color: #555555;
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
 }

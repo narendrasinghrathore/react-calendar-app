@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import './Chevron.scss';
 import down from "../../../assets/icons/chevron-down-90.png";
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../../models";
 import { getCalendarVisible, actionShowCalendar, actionHideCalendar } from "../../../store";
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+
 /**
  * Chevron,show hide calendar
  */
@@ -11,6 +13,8 @@ export default function Chevron() {
 
   const disptach = useDispatch();
   const isCalendarVisible = useSelector((state: IAppState) => getCalendarVisible(state));
+
+  const [title, setTitle] = useState('Click to hide');
 
 
 
@@ -30,15 +34,19 @@ export default function Chevron() {
     const val = isCalendarVisible ? false : true;
     //calendar is visible, so hide i.e. display:none
     if (isCalendarVisible) {
+
+      setTitle('Click to show ');
       disptach(actionHideCalendar(val));
     } else {
       //show calendar
+      setTitle('Click to hide');
       disptach(actionShowCalendar(val));
     }
   }
 
 
   return <span onClick={() => updateShowHide()}>
-    <img className={cssClasses()} src={logo} alt={alt} />
+    <KeyboardArrowDownIcon className={cssClasses()} titleAccess={title} />
+    {/* <img className={cssClasses()} src={logo} alt={alt} /> */}
   </span>;
 }

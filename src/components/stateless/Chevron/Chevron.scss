@@ -1,17 +1,19 @@
-img.chevron {
+@import "../../../partial";
+.chevron {
   height: 16px;
   margin: 0px;
   float: right;
   clear: right;
-  background-color: #609bc8;
+  background-color: $background-color;
   border-radius: 3px;
   padding: 5px;
+  color: white;
   cursor: pointer;
   box-shadow: 2px 3px 5px 1px #adabab;
-  transition: transform 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition: transform 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28) !important;
 }
 
-img.show {
+.show {
   transform: rotate(180deg);
   background-color: #dedede;
   box-shadow: none;

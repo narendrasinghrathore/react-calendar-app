@@ -1,12 +1,5 @@
 import { CSSProperties } from "react";
 
-/**
- * Constructs a type with all properties of T set to optional.
- * This utility will return a type that represents
- * all subsets of a given type
- */
-type MyStyles = Partial<CSSProperties>;
-
 const cardsContainerLayout: CSSProperties = {
   display: "grid-inline",
   gridTemplateAreas: "auto auto auto auto",
