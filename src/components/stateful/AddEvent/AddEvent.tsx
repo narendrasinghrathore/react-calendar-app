@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -12,7 +12,7 @@ import { IAppState } from "../../../models/AppState";
 import { selectorShowDialog, actionHideEvent } from "../../../store";
 
 export default function AddEvent() {
-    const { register, handleSubmit, watch, errors } = useForm();
+    // const { register, handleSubmit, watch, errors } = useForm();
 
     const dispatch = useDispatch();
 
