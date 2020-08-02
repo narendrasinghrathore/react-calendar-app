@@ -1,4 +1,4 @@
-const ACTION = "[CALENDAR]: ";
+const ACTION = "[CALENDAR]:";
 const GET_MONTH = `${ACTION} Get Total Days of Months`;
 const GET_WEEKNAMES = `${ACTION} Get Week Names`;
 const SET_DATE = `${ACTION} Set Selected Date`;
@@ -29,11 +29,15 @@ const actionSetSelectedDate = (date: string) => ({
   type: SET_DATE,
   payload: date,
 });
-
+/**
+ * Show event(s).
+ */
 const actionShowDialog = () => ({
   type: SHOW_DIALOG,
 });
-
+/**
+ * Hide event(s) dialog
+ */
 const actionHideDialog = () => ({
   type: HIDE_DIALOG,
 });

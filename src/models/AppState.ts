@@ -1,5 +1,8 @@
+import { IEventState } from "./Events";
+
 export interface IAppState {
   month: IMonthState;
+  event: IEventState;
 }
 
 export interface WeekName {

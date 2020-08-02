@@ -1,9 +1,6 @@
-import { IAppState } from "../../models";
-/**
- * Get Application State
- * @param state IAppState
- */
-export const getAppState = (state: IAppState) => state;
+import { IAppState } from "../../models/AppState";
+import { getAppState } from "./app.selector";
+
 /**
  * Get Module State
  * @param state IMonthState

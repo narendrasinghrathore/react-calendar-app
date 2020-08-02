@@ -5,10 +5,11 @@ import monitorReducerEnhancer from "./enhancers/monitorReducer";
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 
 import { combineReducers } from "redux";
-import { month } from "./reducers";
+import { month, event } from "./reducers";
 
 const rootReducer = combineReducers({
   month,
+  event,
 });
 
 export default function configureStore(preloadedState: any) {
