@@ -16,10 +16,10 @@ import { getDialogStatus, actionHideDialog, getSelectedDate } from "../../../sto
 import { Slide } from "@material-ui/core";
 
 const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: React.Ref<unknown>,
+    props: TransitionProps & { children?: React.ReactElement<any, any> },
+    ref: React.Ref<unknown>,
 ) {
-  return <Slide direction="up" ref={ref} {...props} />;
+    return <Slide direction="up" ref={ref} {...props} />;
 });
 /**
  * Show event(s) of selected date
@@ -48,7 +48,7 @@ export default function ShowEvent() {
             open={showHideDialog}
             onClose={handleClose}
             TransitionComponent={Transition}
-            aria-labelledby="max-width-dialog-title"
+            aria-labelledby="your events"
         >
             <DialogTitle id="max-width-dialog-title">{todayDate}</DialogTitle>
             <DialogContent>
