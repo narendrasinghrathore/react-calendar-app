@@ -7,7 +7,9 @@ $max-width: 400px;
   .weekName {
     padding: 5px;
     border-bottom: 1px solid #eeeeee;
-    color: #a09f9f;
+    color: #2e2e2e;
+    text-align: center;
+    font-weight: 600;
   }
 
   @media screen and (max-width: $max-width) {
@@ -49,19 +51,18 @@ $max-width: 400px;
 }
 
 .date-picker {
-  border-bottom: 1px solid #dedede;
-  height: 30px;
+  height: 50px;
   padding: 5px;
   position: relative;
 }
 
 .date-picker input[type="date"] {
-  border-radius: 2px;
-  border: 1px solid #b9b9b9;
-  padding: 2px;
+  border: none;
+  border-bottom: 2px solid black;
+  padding: 3px;
   font-size: 1.2rem;
   font-weight: 600;
-  color: $background-color;
+  color: $color;
 }
 
 .selected-date {
