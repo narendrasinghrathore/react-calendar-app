@@ -9,12 +9,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { IAppState } from "../../../models/AppState";
-import { selectorShowDialog, actionHideEvent } from "../../../store";
+import { selectorShowDialog, selectorGetEventList, getSelectedDate } from "store/selectors";
 import Alert from '@material-ui/lab/Alert';
 import Collapse from "@material-ui/core/Collapse";
 import EventIcon from '@material-ui/icons/Event';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { Slide } from "@material-ui/core";
+import { actionHideEvent, actionAddNewEvent } from "store/actions";
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -25,7 +26,10 @@ const Transition = React.forwardRef(function Transition(
 
 
 export default function AddEvent() {
-    const { register, handleSubmit, errors, } = useForm();
+    const { register, handleSubmit, errors, formState } = useForm();
+    const list = useSelector((state: IAppState) => selectorGetEventList(state));
+
+    const defaultSelectedDate = useSelector((state: IAppState) => getSelectedDate(state));
 
     const dispatch = useDispatch();
 
@@ -34,15 +38,12 @@ export default function AddEvent() {
      */
     const date = () => {
         const value = new Date();
-        const month_ = value.getMonth() + 1;
-        const month = month_ > 9 ? month_ : `0${month_}`;
-        const date_ = value.getDate();
-        const dateFormtted = date_ > 9 ? date_ : `0${date_}`;
         const hour =
             value.getHours() > 9 ? value.getHours() : `0${value.getHours()}`;
         const min =
             value.getMinutes() > 9 ? value.getMinutes() : `0${value.getMinutes()}`;
-        return `${value.getFullYear()}-${month}-${dateFormtted}T${hour}:${min}`;
+        return `${defaultSelectedDate}T${hour}:${min}`;
+        // return `${value.getFullYear()}-${month}-${dateFormtted}T${hour}:${min}`;
     };
 
     const isOpen = useSelector((state: IAppState) => selectorShowDialog(state));
@@ -52,7 +53,14 @@ export default function AddEvent() {
     };
 
     const onFormSubmit = (form: any) => {
-        console.log(form);
+        if (!formState.isValid) return;
+        dispatch(
+            actionAddNewEvent(
+                form,
+                list,
+                () => { dispatch(actionHideEvent()); },
+                (err: any) => { }
+            ));
     };
 
     return (

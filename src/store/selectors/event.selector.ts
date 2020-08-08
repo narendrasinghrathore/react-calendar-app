@@ -1,5 +1,5 @@
 import { IAppState } from "../../models/AppState";
-import { IEventState } from "../../models/Events";
+import { IEventState, IFormState } from "../../models/Events";
 import { getAppState } from "./app.selector";
 
 /**
@@ -15,3 +15,16 @@ export const getEventState = (state: IAppState): IEventState =>
  */
 export const selectorShowDialog = (state: IAppState): boolean =>
   getEventState(state).showDialog;
+/**
+ * Return selected event
+ * @param state IFormState | null
+ */
+export const selectorViewSelectedEvent = (
+  state: IAppState
+): IFormState | null => getEventState(state).selectedEvent;
+/**
+ * Return list of events
+ * @param state IFormState[]
+ */
+export const selectorGetEventList = (state: IAppState): IFormState[] =>
+  getEventState(state).list;

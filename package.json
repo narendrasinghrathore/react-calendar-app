@@ -16,7 +16,7 @@
     "react-hook-form": "^6.2.0",
     "react-icons": "^3.10.0",
     "react-redux": "^7.2.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^3.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "typescript": "^3.9.7"
