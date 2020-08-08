@@ -132,7 +132,7 @@ export default function Month() {
 
   return <div>
     <div className="date-picker">
-      <input type="date" onChange={(e) => updateDate(e)} value={todayDate} />
+      <input type="date" title={`Selected date: ${todayDate}`} onChange={(e) => updateDate(e)} value={todayDate} />
       <Box component="div" style={{ position: 'absolute', right: 0 }}>
         <Fab onClick={e => dispatch(actionShowEvent())}
           color="primary" aria-label="add"
@@ -144,7 +144,7 @@ export default function Month() {
 
     </div>
     <div className="weekNames">
-      {weekNames.map((_) => (<div key={_.alias} className="weekName">{_.alias.toLocaleUpperCase()}</div>))}
+      {weekNames.map((_) => (<div title={_.alias.toLocaleUpperCase()} key={_.alias} className="weekName">{_.alias.toLocaleUpperCase()}</div>))}
     </div>
     <div className={calendarContainerClasses()}>
 
