@@ -1,14 +1,18 @@
 import React from 'react';
-import Month from '../Month/Month';
-import ShowEvents from '../ShowEvents/ShowEvents';
+import LazyLoadingComponent from 'utils/LazyLoadingComponent';
+const ShowEvents = React.lazy(() => import('../ShowEvents/ShowEvents'));
+const Month = React.lazy(() => import('../Month/Month'));
 export default function Calendar() {
     return <>
         <h3>
             Calendar</h3>
         <section>
             <div>
-                <ShowEvents />
-                <Month />
+                <LazyLoadingComponent>
+                    <ShowEvents />
+                </LazyLoadingComponent>
+
+                <LazyLoadingComponent><Month /></LazyLoadingComponent>
             </div>
         </section>
     </>;

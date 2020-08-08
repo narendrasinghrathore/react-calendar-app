@@ -139,7 +139,6 @@ export default function Month() {
           style={{ zIndex: 10, position: "fixed", bottom: '20px', right: '20px' }}>
           <AddIcon />
         </Fab>
-
       </Box>
       <Chevron />
 
