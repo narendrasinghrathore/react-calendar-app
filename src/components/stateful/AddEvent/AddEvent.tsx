@@ -16,6 +16,7 @@ import EventIcon from '@material-ui/icons/Event';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { Slide } from "@material-ui/core";
 import { actionHideEvent, actionAddNewEvent } from "store/actions";
+import uid from 'uid';
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -56,7 +57,9 @@ export default function AddEvent() {
         if (!formState.isValid) return;
         dispatch(
             actionAddNewEvent(
-                form,
+                {
+                    ...form, id: uid(32), date: new Date(form.date).getTime()
+                },
                 list,
                 () => { dispatch(actionHideEvent()); },
                 (err: any) => { }

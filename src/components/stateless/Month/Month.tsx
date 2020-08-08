@@ -7,6 +7,8 @@ import Chevron from "../Chevron/Chevron";
 import AddIcon from '@material-ui/icons/Add';
 import Fab from "@material-ui/core/Fab";
 import Box from "@material-ui/core/Box";
+import LazyLoadingComponent from "utils/LazyLoadingComponent";
+const EventList = React.lazy(() => import("../EventList/EventList"));
 export default function Month() {
 
   /**
@@ -151,7 +153,10 @@ export default function Month() {
         return <div
           data-date={i + 1} style={style}
           onClick={(e) => updateSelectedDate(e)} className={selectedDate(i)} key={i}>
-          <span data-date={i + 1}>{i + 1} </span>
+          <span data-date={i + 1}>{i + 1}</span>
+          <LazyLoadingComponent>
+            <EventList date={`${year}-${month > 10 ? month : "0" + month}-${i + 1 < 10 ? "0" + (i + 1) : (i + 1)}`} />
+          </LazyLoadingComponent>
         </div>
       })}
     </div>

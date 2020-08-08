@@ -11,6 +11,6 @@ export interface IEventState {
 export interface IFormState {
   id: string | number;
   title: string;
-  content: string;
-  date: number | null;
+  content: string | undefined;
+  date: number;
 }

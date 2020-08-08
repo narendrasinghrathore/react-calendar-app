@@ -18,7 +18,26 @@ const initialState: IEventState = {
   addEventLoading: false,
   deleteEventLoading: false,
   viewEventLoading: false,
-  list: [],
+  list: [
+    {
+      title: "8 Aug event",
+      content: "Some content",
+      date: 1596887580000,
+      id: "9a0h95qi93uizn0szegd5skrpzjqrogf",
+    },
+    {
+      title: "Event on 7 Aug",
+      content: "Let see, what are events for next week. ",
+      date: 1596800940000,
+      id: "y6tb1vehxoiw9ky4ufiaw6irc6lb9u73",
+    },
+    {
+      title: "Some content",
+      content: "Some content",
+      date: 1596887160000,
+      id: "vrdp97a6lgskxqrrrgnkt0ttfg7dyvbn",
+    },
+  ],
   selectedEvent: null,
 };
 const event = (state = initialState || undefined, action: any): IEventState => {
