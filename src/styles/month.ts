@@ -20,4 +20,33 @@ const cardsContainer: CSSProperties = {
   gridGap: "10px",
 };
 
-export { cards, cardsContainer, cardsContainerLayout };
+/**
+ * Styles for ul in EventListComponent
+ */
+const eventListUL: CSSProperties = {
+  color: "black",
+  overflowY: "auto",
+  margin: 0,
+  padding: 0,
+  height: "75%",
+  overflowX: "hidden",
+  maxWidth: "250",
+};
+
+const eventListLI: CSSProperties = {
+  listStyle: "none",
+  margin: "3px 0",
+  padding: "0 0 0 5px",
+  textOverflow: "ellipsis",
+  borderLeft: "3px solid green",
+  whiteSpace: "nowrap",
+  cursor: "pointer",
+};
+
+export {
+  cards,
+  cardsContainer,
+  cardsContainerLayout,
+  eventListUL,
+  eventListLI,
+};

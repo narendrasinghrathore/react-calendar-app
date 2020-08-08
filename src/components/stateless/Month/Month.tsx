@@ -75,6 +75,7 @@ export default function Month() {
   const updateSelectedDate = (e: any) => {
     e.stopPropagation();
     const { date } = e.target.dataset;
+    if (!date) return;
     const month_ = month;
     const value = `${year}-${month_ < 10 ? '0' + month_ : month_}-${date.length === 1 ? '0' + date : date}`
 
@@ -152,8 +153,8 @@ export default function Month() {
         const style = i === 0 ? { gridColumnStart: gridColumnStartFrom } : {};
         return <div
           data-date={i + 1} style={style}
-          onClick={(e) => updateSelectedDate(e)} className={selectedDate(i)} key={i}>
-          <span data-date={i + 1}>{i + 1}</span>
+          className={selectedDate(i)} key={i}>
+          <span onClick={(e) => updateSelectedDate(e)} data-date={i + 1}>{i + 1}</span>
           <LazyLoadingComponent>
             <EventList date={`${year}-${month > 10 ? month : "0" + month}-${i + 1 < 10 ? "0" + (i + 1) : (i + 1)}`} />
           </LazyLoadingComponent>

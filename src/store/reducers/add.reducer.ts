@@ -20,6 +20,30 @@ const initialState: IEventState = {
   viewEventLoading: false,
   list: [
     {
+      title: "Let add again some event.",
+      content: "",
+      date: 1597147980000,
+      id: "jbte961d4dkb071pc2jedonqzvmlx44c",
+    },
+    {
+      title: "Again some event",
+      content: "",
+      date: 1597147980000,
+      id: "zi30f2arsuarmf648fe9hgyt2cw99bjl",
+    },
+    {
+      title: "Some event AGAIN.",
+      content: "",
+      date: 1597147980000,
+      id: "xk6g7gqwnimfi23j307a2514objyro78",
+    },
+    {
+      title: "Some event on 11 Aug",
+      content: "Let see",
+      date: 1597147920000,
+      id: "mtnguqdrhdhoo2iq5dy40d8lg1q1tfz4",
+    },
+    {
       title: "8 Aug event",
       content: "Some content",
       date: 1596887580000,
