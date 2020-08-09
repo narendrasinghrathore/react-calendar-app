@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -9,14 +9,16 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { IAppState } from "../../../models/AppState";
-import { selectorShowDialog, selectorGetEventList, getSelectedDate } from "store/selectors";
+import { selectorShowDialog, getSelectedDate, selectorEventEditMode, selectorEventViewMode, selectorEventCreateMode, selectorViewSelectedEvent } from "store/selectors";
 import Alert from '@material-ui/lab/Alert';
 import Collapse from "@material-ui/core/Collapse";
 import EventIcon from '@material-ui/icons/Event';
+import EditIcon from '@material-ui/icons/Edit';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { Slide } from "@material-ui/core";
-import { actionHideEvent, actionAddNewEvent } from "store/actions";
+import { actionHideEvent, actionAddNewEvent, actionUpdateEvent, actionEventEditMode } from "store/actions";
 import uid from 'uid';
+import { IFormState } from "models";
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -27,25 +29,54 @@ const Transition = React.forwardRef(function Transition(
 
 
 export default function AddEvent() {
-    const { register, handleSubmit, errors, formState } = useForm();
-    const list = useSelector((state: IAppState) => selectorGetEventList(state));
-
+    const { register, handleSubmit, errors, reset } = useForm();
     const defaultSelectedDate = useSelector((state: IAppState) => getSelectedDate(state));
+
+    const editMode = useSelector((state: IAppState) => selectorEventEditMode(state));
+    const viewMode = useSelector((state: IAppState) => selectorEventViewMode(state));
+    const createMode = useSelector((state: IAppState) => selectorEventCreateMode(state));
+
+    const selectedEvent: IFormState | null = useSelector((state: IAppState) => selectorViewSelectedEvent(state));
 
     const dispatch = useDispatch();
 
     /**
-     * Return today's date as default selected date value
-     */
-    const date = () => {
-        const value = new Date();
+    * Return today's date as default selected date value
+    */
+    const date = useCallback((val?: number) => {
+        const value = val ? new Date(val) : new Date();
+
         const hour =
             value.getHours() > 9 ? value.getHours() : `0${value.getHours()}`;
         const min =
             value.getMinutes() > 9 ? value.getMinutes() : `0${value.getMinutes()}`;
+
+        if (val) {
+            const month = (value.getMonth() + 1) > 10 ? (value.getMonth() + 1) : ("0" + (value.getMonth() + 1));
+            const dateFormtted = value.getDate() > 10 ? value.getDate() : "0" + value.getDate();
+            return `${value.getFullYear()}-${month}-${dateFormtted}T${hour}:${min}`;
+        }
         return `${defaultSelectedDate}T${hour}:${min}`;
-        // return `${value.getFullYear()}-${month}-${dateFormtted}T${hour}:${min}`;
-    };
+    }, [defaultSelectedDate]);
+
+    useEffect(() => {
+        if (viewMode === true && selectedEvent) {
+            reset({ ...selectedEvent, date: date(selectedEvent.date) });
+        }
+        if(createMode){
+            reset({});
+        }
+    }, [date, reset, selectedEvent, viewMode,createMode]);
+
+    useEffect(() => {
+        return () => {
+            console.log('rest');
+            reset({});
+        }
+
+    }, [reset]);
+
+
 
     const isOpen = useSelector((state: IAppState) => selectorShowDialog(state));
 
@@ -54,16 +85,19 @@ export default function AddEvent() {
     };
 
     const onFormSubmit = (form: any) => {
-        if (!formState.isValid) return;
-        dispatch(
-            actionAddNewEvent(
-                {
-                    ...form, id: uid(32), date: new Date(form.date).getTime()
-                },
-                list,
-                () => { dispatch(actionHideEvent()); },
-                (err: any) => { }
-            ));
+        if (editMode && selectedEvent) {
+            dispatch(actionUpdateEvent({ ...form, id: selectedEvent.id }, () => { }, () => { }));
+        }
+        if (createMode) {
+            dispatch(
+                actionAddNewEvent(
+                    {
+                        ...form, id: uid(32), date: new Date(form.date).getTime()
+                    },
+                    () => { dispatch(actionHideEvent()); },
+                    (err: any) => { }
+                ));
+        }
     };
 
     return (
@@ -81,7 +115,7 @@ export default function AddEvent() {
                 <DialogContentText>
                     To add new event, add title and content here.
         </DialogContentText>
-                <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
+                <form onSubmit={handleSubmit((form) => onFormSubmit(form))} noValidate>
                     <TextField
                         name="title"
                         autoFocus
@@ -92,6 +126,8 @@ export default function AddEvent() {
                         multiline
                         rows={2}
                         fullWidth
+
+                        disabled={viewMode}
                         inputRef={register({ required: "Title required" })}
                     />
                     <Collapse in={errors.title}>
@@ -108,10 +144,12 @@ export default function AddEvent() {
                         multiline
                         rows={5}
                         inputRef={register}
+                        disabled={viewMode}
                     />
                     <TextField
                         name="date"
                         id="datetime-local"
+                        disabled={viewMode}
                         label="Date"
                         fullWidth
                         type="datetime-local"
@@ -125,9 +163,13 @@ export default function AddEvent() {
                     </Collapse>
                     <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
-                        <Button type="submit" color="primary">
+                        {viewMode && <Button onClick={() => dispatch(actionEventEditMode())} aria-label="Click to edit event"><EditIcon /></Button>}
+                        {editMode && <Button title="Click to update event" type="submit" color="primary">
+                            Update
+                        </Button>}
+                        {createMode && <Button title="Save new event" type="submit" color="primary">
                             Save
-            </Button>
+                        </Button>}
                     </DialogActions>
                 </form>
             </DialogContent>

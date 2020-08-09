@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import './Month.scss';
 import { useSelector, useDispatch } from "react-redux";
-import { getTotalNumberOfDays, actionGetMonthDays, actionGetWeekNames, getWeekNames, actionSetSelectedDate, getSelectedDate, getCalendarVisible, actionShowDialog, actionShowEvent } from "../../../store";
-import { IAppState, WeekName } from "../../../models";
+import { getTotalNumberOfDays, actionGetMonthDays, actionGetWeekNames, getWeekNames, actionSetSelectedDate, getSelectedDate, getCalendarVisible, actionShowDialog, actionEventMode } from "../../../store";
+import { IAppState, WeekName, EventMode } from "../../../models";
 import Chevron from "../Chevron/Chevron";
 import AddIcon from '@material-ui/icons/Add';
 import Fab from "@material-ui/core/Fab";
@@ -134,8 +134,8 @@ export default function Month() {
     <div className="date-picker">
       <input type="date" title={`Selected date: ${todayDate}`} onChange={(e) => updateDate(e)} value={todayDate} />
       <Box component="div" style={{ position: 'absolute', right: 0 }}>
-        <Fab onClick={e => dispatch(actionShowEvent())}
-          color="primary" aria-label="add"
+        <Fab onClick={e => dispatch(actionEventMode(EventMode.createMode, () => { }, () => { }))}
+          color="primary" aria-label="Add new item"
           style={{ zIndex: 10, position: "fixed", bottom: '20px', right: '20px' }}>
           <AddIcon />
         </Fab>

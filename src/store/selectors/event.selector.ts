@@ -28,3 +28,24 @@ export const selectorViewSelectedEvent = (
  */
 export const selectorGetEventList = (state: IAppState): IFormState[] =>
   getEventState(state).list;
+
+/**
+ * Edit Mode for event
+ * @param state boolean
+ */
+export const selectorEventEditMode = (state: IAppState): boolean =>
+  getEventState(state).editMode;
+
+/**
+ * Create Mode for event
+ * @param state boolean
+ */
+export const selectorEventCreateMode = (state: IAppState): boolean =>
+  getEventState(state).createMode;
+
+/**
+ * View Mode for event
+ * @param state boolean
+ */
+export const selectorEventViewMode = (state: IAppState): boolean =>
+  getEventState(state).viewMode;

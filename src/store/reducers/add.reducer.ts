@@ -1,4 +1,4 @@
-import { IEventState } from "../../models/Events";
+import { IEventState, IFormState } from "../../models/Events";
 import {
   ACTION_EVENT_HIDE_DIALOG,
   ACTION_EVENT_SHOW_DIALOG,
@@ -11,13 +11,22 @@ import {
   ACTION_EVENT_DELETE_SUCCESS,
   ACTION_EVENT_VIEW_FAIL,
   ACTION_EVENT_VIEW_SUCCESS,
+  ACTION_EVENT_UPDATE_INIT,
+  ACTION_EVENT_UPDATE_FAIL,
+  ACTION_EVENT_UPDATE_SUCCESS,
+  ACTION_EVENT_EDIT_MODE,
+  ACTION_EVENT_CREATE_MODE,
 } from "../actions/add.action";
 const initialState: IEventState = {
   loading: false,
   showDialog: false,
+  createMode: false,
+  viewMode: false,
+  editMode: false,
   addEventLoading: false,
   deleteEventLoading: false,
   viewEventLoading: false,
+  editEventLoading: false,
   list: [
     {
       title: "Let add again some event.",
@@ -69,15 +78,25 @@ const event = (state = initialState || undefined, action: any): IEventState => {
     case ACTION_EVENT_SHOW_DIALOG: {
       return { ...state, showDialog: true };
     }
+    case ACTION_EVENT_CREATE_MODE: {
+      return { ...state, createMode: true, editMode: false, viewMode: false };
+    }
     case ACTION_EVENT_HIDE_DIALOG: {
-      return { ...state, showDialog: false };
+      return {
+        ...state,
+        showDialog: false,
+        editMode: false,
+        viewMode: false,
+        createMode: false,
+        selectedEvent: null
+      };
     }
     case ACTION_EVENT_ADD_NEW_INIT: {
       return { ...state, addEventLoading: true };
     }
     case ACTION_EVENT_ADD_NEW_SUCCESS: {
-      const { list } = action.payload;
-      return { ...state, addEventLoading: false, list };
+      const { form } = action.payload;
+      return { ...state, addEventLoading: false, list: [form, ...state.list] };
     }
     case ACTION_EVENT_ADD_NEW_FAIL: {
       return { ...state, addEventLoading: false };
@@ -86,17 +105,53 @@ const event = (state = initialState || undefined, action: any): IEventState => {
       return { ...state, viewEventLoading: true };
     }
     case ACTION_EVENT_VIEW_SUCCESS: {
-      const { selectedEvent } = action.payload;
+      const { id } = action.payload;
+      const selectedEvent = state.list.find((item) => item.id === id);
       return {
         ...state,
         selectedEvent: selectedEvent ? selectedEvent : null,
         viewEventLoading: false,
+        viewMode: true,
+        createMode: false,
+        editMode: false,
       };
     }
     case ACTION_EVENT_VIEW_FAIL: {
       return {
         ...state,
         viewEventLoading: false,
+        viewMode: false,
+        createMode: false,
+        editMode: false,
+      };
+    }
+    case ACTION_EVENT_EDIT_MODE: {
+      return { ...state, editMode: true, createMode: false, viewMode: false };
+    }
+    case ACTION_EVENT_UPDATE_INIT: {
+      return { ...state, editEventLoading: true };
+    }
+    case ACTION_EVENT_UPDATE_SUCCESS: {
+      const { form }: { form: IFormState } = action.payload;
+      const list = state.list;
+      const itemIndex = list.findIndex((item) => item.id === form.id);
+      if (itemIndex !== -1) list[itemIndex] = form;
+      return {
+        ...state,
+        list,
+        editEventLoading: false,
+        editMode: false,
+        viewMode: false,
+        createMode: false,
+      };
+    }
+    case ACTION_EVENT_UPDATE_FAIL: {
+      return {
+        ...state,
+        editEventLoading: false,
+        editMode: false,
+        viewMode: false,
+        createMode: false,
       };
     }
 
