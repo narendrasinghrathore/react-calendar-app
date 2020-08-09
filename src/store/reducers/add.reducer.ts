@@ -133,7 +133,7 @@ const event = (state = initialState || undefined, action: any): IEventState => {
     }
     case ACTION_EVENT_UPDATE_SUCCESS: {
       const { form }: { form: IFormState } = action.payload;
-      const list = state.list;
+      const list = [...state.list];
       const itemIndex = list.findIndex((item) => item.id === form.id);
       if (itemIndex !== -1) list[itemIndex] = form;
       return {

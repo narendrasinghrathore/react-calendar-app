@@ -63,14 +63,13 @@ export default function AddEvent() {
         if (viewMode === true && selectedEvent) {
             reset({ ...selectedEvent, date: date(selectedEvent.date) });
         }
-        if(createMode){
+        if (createMode) {
             reset({});
         }
-    }, [date, reset, selectedEvent, viewMode,createMode]);
+    }, [date, reset, selectedEvent, viewMode, createMode]);
 
     useEffect(() => {
         return () => {
-            console.log('rest');
             reset({});
         }
 
@@ -86,7 +85,7 @@ export default function AddEvent() {
 
     const onFormSubmit = (form: any) => {
         if (editMode && selectedEvent) {
-            dispatch(actionUpdateEvent({ ...form, id: selectedEvent.id }, () => { }, () => { }));
+            dispatch(actionUpdateEvent({ ...form, id: selectedEvent.id, date: new Date(form.date).getTime() }, () => { }, () => { }));
         }
         if (createMode) {
             dispatch(
