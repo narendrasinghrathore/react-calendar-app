@@ -22,7 +22,6 @@ $max-width: 400px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 0;
-  padding: 5px;
   box-sizing: border-box;
   overflow-x: auto;
 
@@ -39,6 +38,7 @@ $max-width: 400px;
   display: none;
 }
 .cards {
+  overflow: hidden;
   z-index: 0;
   position: relative;
   border: 1px solid rgb(240, 240, 240);

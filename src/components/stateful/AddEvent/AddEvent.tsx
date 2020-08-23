@@ -27,7 +27,17 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
+/**
+ * Component AddEvent let you add, edit events.
+ * @example
+ * const { register, handleSubmit, errors, reset } = useForm();
+ * const defaultSelectedDate = useSelector((state: IAppState) => getSelectedDate(state));
+ * const editMode = useSelector((state: IAppState) => selectorEventEditMode(state));
+ * const viewMode = useSelector((state: IAppState) => selectorEventViewMode(state));
+ * const createMode = useSelector((state: IAppState) => selectorEventCreateMode(state));
+ * const selectedEvent: IFormState | null = useSelector((state: IAppState) => selectorViewSelectedEvent(state));
+ * const dispatch = useDispatch();
+ */
 export default function AddEvent() {
     const { register, handleSubmit, errors, reset } = useForm();
     const defaultSelectedDate = useSelector((state: IAppState) => getSelectedDate(state));
